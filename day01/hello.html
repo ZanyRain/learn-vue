@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue</title>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <ul>
+        <li v-for="baozi in baoziList">{{baozi}}</li>
+    </ul>
+    <hr>
+    <h3>点击了{{counter}}次</h3>
+    <h3 v-once>点击了{{counter}}次（使用了 v-once 指令后不会变）</h3>
+    <button v-on:click="counter++">+</button>
+    <button v-on:click="counter--">-</button>
+    <hr>
+    <h4 v-html="url"></h4>
+    <h4 v-text="url"></h4>
+    <h4>{{url}}</h4>
+    <!-- 原封不动显示 -->
+    <h4 v-pre>{{url}}</h4>
+</div>
+<script src="../vendor/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: "你好 Vue",
+            baoziList: ['小笼包', '叉烧包', '奶黄芝麻豆沙包'],
+            counter: 0,
+            url: '<a href="https://github.com/zanyrain">Github</a>'
+        }
+    });
+</script>
+</body>
+</html>

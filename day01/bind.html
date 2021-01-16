@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bind</title>
+</head>
+<body>
+<div id="app">
+    <img :src="image" alt="">
+    <h1 :class="config">测试一</h1>
+    <h1 :class="{'blue':blue}">测试二</h1>
+</div>
+<script src="../vendor/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            image: 'https://cn.vuejs.org/images/logo.png',
+            config: [],
+            blue: true
+        },
+        methods: {}
+    });
+</script>
+<script>
+    setTimeout(function () {
+        app.config.push('red');
+        setTimeout(function () {
+            app.config.push('center')
+        }, 1000);
+    }, 1000);
+    setInterval(function () {
+        app.blue = !app.blue;
+    }, 1000);
+</script>
+<style>
+    .center {
+        text-align: center;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .blue {
+        color: blue;
+    }
+</style>
+</body>
+</html>

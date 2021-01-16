@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <table border="1px" cellspacing="0" align="center" style="text-align: center">
+        <thead>
+        <tr>
+            <th>选择</th>
+            <th>序号</th>
+            <th>图片</th>
+            <th>标题</th>
+            <th>价格</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(book,index) in bookList" @mouseover="active = index" @click="book.select = !book.select"
+            :class="{'active': isActive(index)}">
+            <td><a v-if="book.select">√</a></td>
+            <td>{{index + 1}}</td>
+            <td><img :src="book.image" :alt="book.name" height="100px"></td>
+            <td>{{book.name}}</td>
+            <td><a style="color: red">￥{{book.price}}</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <p style="text-align: center;">总价格：<a style="color: red;font-size: large">￥{{totalPrice}}</a></p>
+</div>
+<script src="../vendor/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            bookList: [
+                {
+                    name: "数学之美 第三版",
+                    image: "http://img3m2.ddimg.cn/18/30/28538352-1_l_5.jpg",
+                    price: 34.50,
+                    select: false
+                },
+                {
+                    name: "C++ Primer中文版（第5版）",
+                    image: "http://img3m2.ddimg.cn/33/18/23321562-1_b_24.jpg",
+                    price: 80.20,
+                    select: false
+                },
+                {
+                    name: "深入理解Java虚拟机：JVM高级特性",
+                    image: "http://img3m5.ddimg.cn/55/8/28495225-1_l_3.jpg",
+                    price: 83.90,
+                    select: false
+                },
+                {
+                    name: "高性能MySQL",
+                    image: "http://img3m0.ddimg.cn/80/13/23214590-1_l_9.jpg",
+                    price: 63.40,
+                    select: false
+                },
+                {
+                    name: "UNIX环境高级编程",
+                    image: "http://img3m3.ddimg.cn/18/32/27949203-1_l_5.jpg",
+                    price: 84.50,
+                    select: false
+                }
+            ], active: -1
+        }, methods: {
+            isActive(index) {
+                return index === this.active;
+            }
+        }, computed: {
+            totalPrice() {
+                let total = 0;
+                for (let i = 0; i < this.bookList.length; i++) {
+                    if (this.bookList[i].select === true) {
+                        total += this.bookList[i].price;
+                    }
+                }
+                return total;
+            }
+        }
+    });
+</script>
+<style>
+    .active {
+        background-color: lightskyblue;
+    }
+</style>
+</body>
+</html>
